@@ -1,8 +1,8 @@
-﻿@model Entity.Entity.ProductCategory
+﻿@model Entity.Entity.Order
 
 @{
-    ViewBag.Title = "AddProductCategory";
-    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+    ViewBag.Title = "AddOrder";
+    Layout = "~/Views/Shared/_BuyerLayout.cshtml";
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -38,7 +38,7 @@
                     <div class="pd-20 card-box mb-30">
 
                         <!-- Buraya Form Kısmını Ekle -->
-                        @using (Html.BeginForm("AddProductCategory", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("AddOrder", "Buyer", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
 
@@ -47,24 +47,38 @@
                                 <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.OfferPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-12">
-                                        <input type="text" name="Title" class="form-control" required placeholder="Lütfen Ketegori Giriniz" />
-                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                        <input type="number" name="OfferPrice" class="form-control" required placeholder="OfferPrice" />
+                                        @Html.ValidationMessageFor(model => model.OfferPrice, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-2">Açıklama</label>
+                                    <label class="control-label col-md-2">Description</label>
                                     <div class="col-md-12">
-                                        @Html.TextAreaFor(model => model.Content, new { @class = "form-control", style = "width:100%" })
-                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", style = "width:100%" })
+                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Döviz Tipi</label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownList("CurrencyTypeid", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.CurrencyTypeid, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Ürün Kategori</label>
+                                    <div class="col-md-12">
+                                        @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ProductCategoryid, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-offset-2 col-md-12">
                                         <div class="col-md-offset-2 col-md-12">
-                                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i> Yeni Kategori Ekle</button>
-                                            <a href="/Admin/Seller/ProductCategory" class="btn btn-outline-dark"><i class="fa fa-reply-all"></i> Listeye Geri Dön</a>
+                                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i> Yeni Sipariş Ekle</button>
+                                            <a href="" class="btn btn-outline-dark"><i class="fa fa-reply-all"></i> Listeye Geri Dön</a>
                                         </div>
                                     </div>
                                 </div>

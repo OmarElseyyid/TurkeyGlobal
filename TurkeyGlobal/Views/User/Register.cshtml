@@ -1,0 +1,140 @@
+﻿@model Entity.Entity.User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 3 | Registration Page (v2)</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition register-page">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="pd-ltr-20 xs-pd-20-10">
+                    <div class="min-height-200px">
+                        <div class="page-header">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        @if (ViewBag.Mesaj != null)
+                        {
+                            <div class="pd-20 card-box mb-30">
+                                <div class="clearfix">
+                                    <div class="pull-left">
+                                        <h4 class="text-blue h4">Hata Mesajı</h4>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>@ViewBag.Mesaj</p>
+                                </div>
+                            </div>
+                        }
+                        <div class="pd-20 card-box mb-30">
+
+                            <!-- Buraya Form Kısmını Ekle -->
+                            @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-12">
+                                        <input type="text" name="Name" class="form-control" required placeholder="Name" />
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.SurName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-12">
+                                        <input type="text" name="SurName" class="form-control" required placeholder="SurName" />
+                                        @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+                                    </div>
+                                        </div><div class="form-group">
+                                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-12">
+                                            <input type="text" name="UserName" class="form-control" required placeholder="UserName" />
+                                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-12">
+                                        <input type="password" name="Password" class="form-control" required placeholder="Password" />
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-12">
+                                        <input type="email" name="Email" class="form-control" required placeholder="Email" />
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    Alıcı
+                                    <div class="col-md-12">
+                                        
+                                        <input type="radio" name="UserRolid" class="form-control" value="1" />
+                                        @Html.ValidationMessageFor(model => model.UserRolid, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    Satıcı
+                                    <div class="col-md-12">
+
+                                        <input type="radio" name="UserRolid" class="form-control" value="3"/>
+                                        @Html.ValidationMessageFor(model => model.UserRolid, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-12">
+                                        <div class="col-md-offset-2 col-md-12">
+                                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i> Yeni Ürün Ekle</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+
+                            <!--Form bitiş-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- /.register-box -->
+    <!-- jQuery -->
+    <script src="~/Content/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/Content/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/adminlte.min.js"></script>
+</body>
+</html>

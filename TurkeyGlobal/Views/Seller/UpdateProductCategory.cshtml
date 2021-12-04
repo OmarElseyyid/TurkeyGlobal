@@ -1,120 +1,106 @@
-﻿@model Entity.Entity.Product
+﻿@model Entity.Entity.ProductCategory
 
 @{
     ViewBag.Title = "UpdateProductCategory";
     Layout = "~/Views/Shared/_SellerLayout.cshtml";
 }
 
-<h2>UpdateProduct</h2>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="pd-ltr-20 xs-pd-20-10">
+                <div class="min-height-200px">
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="title">
+                                    <h3>Kategori Güncelle</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 text-right">
+                                <img src="~/Areas/Admin/Context/mekasoftware/180x180-M.png" alt="Meka Software" width="50" />
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.Mesaj != null)
+                    {
+                        <div class="pd-20 card-box mb-30">
+                            <div class="clearfix">
+                                <div class="pull-left">
+                                    <h4 class="text-blue h4">Hata Mesajı</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <p>@ViewBag.Mesaj</p>
+                            </div>
+                        </div>
+                    }
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            <div class="pull-left">
+                                <h4 class="text-blue h4">Kategori Güncelle</h4>
+                            </div>
+                        </div>
+                        <!-- Buraya Form Kısmını Ekle -->
+                        @using (Html.BeginForm("UpdateProductCategory", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+                            <div class="form-horizontal">
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Title</label>
+                                    <div class="col-md-12">
+                                        <input type="text" name="Title" value="@Model.Title" class="form-control" required placeholder="Title" maxlength="110" />
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                               
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                               
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ShorDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ShorDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ShorDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Açıklama</label>
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.Content, new { @class = "form-control", style = "width:100%" })
+                                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                               
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Slug, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CurrencyTypeid, "CurrencyTypeid", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CurrencyTypeid", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CurrencyTypeid, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Sellerid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Sellerid, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Sellerid, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductCategoryID, "ProductCategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastDateTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastDateTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Aktif Durumu</label>
+                                    <div class="col-md-12">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsActive) Aktif | Pasif
+                                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i>Kategori Güncelle</button>
+                                            <a href="@Url.Action("Index","Seller")" class="btn btn-outline-dark"><i class="fa fa-reply-all"></i> Listeye Geri Dön</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!--Form bitiş-->
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    </section>
+    <!-- /.content -->
 </div>
+<!-- /.content-wrapper -->

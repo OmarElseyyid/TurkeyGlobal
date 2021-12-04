@@ -1,7 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BuyerLayout.cshtml";
 }
 
-<h2>Buyer Index</h2>
+
+    
+            @{Html.RenderAction("OrdertList", "Buyer");}
+      
+
+
 

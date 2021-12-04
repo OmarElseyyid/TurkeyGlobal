@@ -133,6 +133,7 @@
     <Compile Include="Controllers\BuyerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2287,7 +2288,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -2303,6 +2303,16 @@
     <Content Include="Views\Seller\AddProductCategory.cshtml" />
     <Content Include="Views\Seller\UpdateProductCategory.cshtml" />
     <Content Include="Views\Seller\ProductCategoryList.cshtml" />
+    <Content Include="Views\Seller\ProductListleme.cshtml" />
+    <Content Include="Views\Buyer\AddOrder.cshtml" />
+    <Content Include="Views\Buyer\UpdateOrder.cshtml" />
+    <Content Include="Views\Buyer\OrdertList.cshtml" />
+    <Content Include="Views\Buyer\OrderListleme.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Buyer\ProductList.cshtml" />
+    <Content Include="Views\Seller\OrderListleme.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

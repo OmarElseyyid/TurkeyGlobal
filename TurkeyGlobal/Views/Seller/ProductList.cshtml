@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Entity.Entity.Product>
+﻿
+@model IEnumerable<Entity.Entity.Product>
 
 <form method="post">
     <div class="card-box mb-30">
@@ -50,8 +51,8 @@
                                     <i class="dw dw-more"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                    <a class="dropdown-item" href="{controller}/{action}/@item.ID"><i class="dw dw-edit2"></i> Güncelle</a>
-                                    <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="{controller}/{action}/@item.ID"><i class="dw dw-delete-3"></i> Sil</a>
+                                    <a class="dropdown-item" href="@Url.Action("UpdateProduct/"+item.ID,"Seller")"><i class="dw dw-edit2"></i> Güncelle</a>
+                                    <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="@Url.Action("DeleteProduct/"+item.ID,"Seller")"><i class="dw dw-delete-3"></i> Sil</a>
                                 </div>
                             </div>
                         </td>

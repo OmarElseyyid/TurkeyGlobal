@@ -1,0 +1,90 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+@model IEnumerable<Entity.Entity.Product>
+
+
+<div class="content-wrapper">
+
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="container-fluid">
+                    <section class="content">
+                        <div class="container-fluid">
+
+                            <form method="post">
+                                <div class="card-box mb-30">
+
+                                    <table class="data-table table nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>File</th>
+                                                <th>Description</th>
+                                                <th>Short Description</th>
+                                                <th>Son Güncelleme Tarihi</th>
+                                                <th>Aktif Durumu</th>
+                                                <th class="datatable-nosort">İşlemler</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@item.Title</td>
+                                                    @if (item.File.EndsWith(".PNG") || item.File.EndsWith(".JPG") || item.File.EndsWith(".JPEG") || item.File.EndsWith(".GIF") || item.File.EndsWith(".TIFF") || item.File.EndsWith(".jpg") || item.File.EndsWith(".png") || item.File.EndsWith(".jpeg") || item.File.EndsWith(".tiff") || item.File.EndsWith(".gif"))
+                                                    {
+                                                        <td><img src="~/File/Products/@item.File" width="150" /></td>
+                                                    }
+                                                    else if (item.File.EndsWith(".avi") || item.File.EndsWith(".AVI") || item.File.EndsWith(".mp4") || item.File.EndsWith(".MP4") || item.File.EndsWith(".mov") || item.File.EndsWith(".MOV") || item.File.EndsWith(".flv") || item.File.EndsWith(".FLV") || item.File.EndsWith(".mpg") || item.File.EndsWith(".MPG"))
+                                                    {
+                                                        <td>
+                                                            <video width="150" height="150" controls>
+                                                                <source src="~/File/Products/@item.File" type="video/mp4">
+                                                            </video>
+                                                        </td>
+                                                    }
+                                                    <td>@item.Description</td>
+                                                    <td>@item.ShorDescription</td>
+
+                                                    <td>@item.LastDateTime.ToString("dd:MM:yyyy")</td>
+                                                    @if (item.IsActive == true)
+                                                    {
+                                                        <td><span class="badge badge-success"><i class="fa fa-check"></i> Aktif</span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><span class="badge badge-danger"><i class="fa fa-remove"></i> Pasif</span></td>
+                                                    }
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                                <i class="dw dw-more"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                                <a class="dropdown-item" href="@Url.Action("UpdateProduct/"+item.ID,"Seller")"><i class="dw dw-edit2"></i> Güncelle</a>
+                                                                <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="@Url.Action("DeleteProduct/"+item.ID,"Seller")"><i class="dw dw-delete-3"></i> Sil</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+
+                    </section>
+                </div>
+
+            </section>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>

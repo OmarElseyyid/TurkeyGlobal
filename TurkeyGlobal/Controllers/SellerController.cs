@@ -55,7 +55,24 @@ namespace TurkeyGlobal.Controllers
         }
         #endregion
         #region List
+        public ActionResult OrderListleme()
+        {
+            var x = db.Orders.ToList();
+            return View(x);
+        }
         public ActionResult ProductList()
+        {
+            var x = db.Products.ToList();
+
+            return View(x);
+        }
+        public ActionResult ProductCategoryList()
+        {
+            var x = db.ProductCategories.ToList();
+
+            return View(x);
+        }
+        public ActionResult ProductListleme()
         {
             var x = db.Products.ToList();
             return View(x);
@@ -99,7 +116,6 @@ namespace TurkeyGlobal.Controllers
                 AU.Description = product.Description;
                 AU.ShorDescription = product.ShorDescription;
                 AU.Price = product.Price;
-                AU.CurrencyTypeid = product.CurrencyTypeid;
                 AU.ProductCategoryID = product.ProductCategoryID;
                 AU.Sellerid = product.Sellerid;
                 AU.ProductCategoryID = product.ProductCategoryID;
@@ -107,7 +123,7 @@ namespace TurkeyGlobal.Controllers
                 AU.LastDateTime = DateTime.Now;
                 AU.Slug = StringHelper.StringReplacer(AU.Title.ToLower());
                 db.SaveChanges();
-                return RedirectToAction("Product", "Dashboard");
+                return RedirectToAction("Index", "Seller");
             }
             ViewBag.ProductCategoryID = new SelectList(db.ProductCategories.Where(x => x.IsActive == true), "ID", "Title", product.ProductCategoryID);
             return View(product);
@@ -123,7 +139,7 @@ namespace TurkeyGlobal.Controllers
             }
             db.Products.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("Product", "Dashboard");
+            return RedirectToAction("Index", "Seller");
         }
         #endregion
         //ProductCategory
@@ -135,19 +151,17 @@ namespace TurkeyGlobal.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult AddProductCategory(ProductCategory productcategory, HttpPostedFileBase File)
+        public ActionResult AddProductCategory(ProductCategory productcategory)
         {
             User user = new User();
             if (ModelState.IsValid)
             {
-
-
                 productcategory.IsActive = true;
                 productcategory.LastDateTime = DateTime.Now;
                 productcategory.Slug = StringHelper.StringReplacer(productcategory.Title.ToLower());
                 db.ProductCategories.Add(productcategory);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Seller");
+                return RedirectToAction("ProductCategoryList", "Seller");
 
             }
 
@@ -157,15 +171,13 @@ namespace TurkeyGlobal.Controllers
         #region Delete
         public ActionResult DeleteProductCategory(int ID)
         {
-            Product product = db.Products.Where(x => x.ID == ID).SingleOrDefault();
-            if (System.IO.File.Exists(Server.MapPath("~/File/Products/" + product.File)))
-            {
-                System.IO.File.Delete(Server.MapPath("~/File/Products/" + product.File));
-            }
-            db.Products.Remove(product);
+            ProductCategory product = db.ProductCategories.Where(x => x.ID == ID).SingleOrDefault();
+           
+            db.ProductCategories.Remove(product);
             db.SaveChanges();
-            return RedirectToAction("ProductCategory", "Index");
+            return RedirectToAction("Index", "Seller");
         }
+
         #endregion
         #region Update
         public ActionResult UpdateProductCategory(int? id)
@@ -174,56 +186,37 @@ namespace TurkeyGlobal.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            ProductCategory productCategory = db.ProductCategories.Find(id);
+            if (productCategory == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories.Where(x => x.IsActive == true), "ID", "Title", product.ProductCategoryID);
-            return View(product);
+           
+            return View(productCategory);
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult UpdateProductCategory(int id, Product product, HttpPostedFileBase File)
+        public ActionResult UpdateProductCategory(int id, ProductCategory productCategory, HttpPostedFileBase File)
         {
-            var AU = db.Products.Find(id);
+            var AU = db.ProductCategories.Find(id);
             if (ModelState.IsValid)
             {
 
-                if (File != null)
-                {
-                    if (System.IO.File.Exists(Server.MapPath("~/File/Products/" + product.File)))
-                    {
-                        System.IO.File.Delete(Server.MapPath("~/File/Products/" + product.File));
-                    }
-                    string photoName = Path.GetFileName(Guid.NewGuid().ToString() + File.FileName);
-                    var url = Path.Combine(Server.MapPath("~/File/Products/" + photoName));
-                    File.SaveAs(url);
-                    AU.File = photoName;
-                }
-                AU.Title = product.Title;
-                AU.Description = product.Description;
-                AU.ShorDescription = product.ShorDescription;
-                AU.Price = product.Price;
-                AU.CurrencyTypeid = product.CurrencyTypeid;
-                AU.ProductCategoryID = product.ProductCategoryID;
-                AU.Sellerid = product.Sellerid;
-                AU.ProductCategoryID = product.ProductCategoryID;
-                AU.IsActive = product.IsActive;
+
+                AU.Title = productCategory.Title;
+                AU.Content = productCategory.Content;
+                
+                AU.IsActive = productCategory.IsActive;
                 AU.LastDateTime = DateTime.Now;
                 AU.Slug = StringHelper.StringReplacer(AU.Title.ToLower());
                 db.SaveChanges();
-                return RedirectToAction("Product", "Dashboard");
+                return RedirectToAction("ProductCategoryList", "Seller");
             }
-            ViewBag.ProductCategoryID = new SelectList(db.ProductCategories.Where(x => x.IsActive == true), "ID", "Title", product.ProductCategoryID);
-            return View(product);
+            return View(productCategory);
         }
         #endregion
         #region List
-        public ActionResult ProductCategoryList()
-        {
-            var x = db.ProductCategories.ToList();
-            return View(x);
-        }
+   
+        
         #endregion
 
     }

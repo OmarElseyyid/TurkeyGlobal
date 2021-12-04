@@ -1,9 +1,9 @@
-﻿@model Entity.Entity.Product
-
+﻿@model Entity.Entity.Order
 @{
-    ViewBag.Title = "UpdateProduct";
-    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+
+    Layout = "~/Views/Shared/_BuyerLayout.cshtml";
 }
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -45,42 +45,21 @@
                             </div>
                         </div>
                         <!-- Buraya Form Kısmını Ekle -->
-                        @using (Html.BeginForm("UpdateProduct", "Seller", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        @using (Html.BeginForm("UpdateOrder", "Buyer", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
 
                     <div class="form-horizontal">
                         <hr />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <label class="control-label col-md-2">Title</label>
-                            <div class="col-md-12">
-                                <input type="text" name="Title" value="@Model.Title" class="form-control" required placeholder="Title" maxlength="110" />
-                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-md-2">ProductCategory</label>
                             <div class="col-md-12">
                                 @Html.DropDownList("ProductCategoryID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ProductCategoryID, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.ProductCategoryid, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                            <div class="input-group">
-                                <div class="custom-file">
-                                    <input type="file" name="File" class="custom-file-input" id="exampleInputFile" required placeholder="Lütfen Dosya Giriniz">
-                                    <label class="custom-file-label" for="exampleInputFile"></label>
-                                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
-                                </div>
-
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <label class="control-label col-md-2">Açıklama</label>
                             <div class="col-md-12">
@@ -89,21 +68,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">ShorDescription</label>
+                            <label class="control-label col-md-2">Price</label>
                             <div class="col-md-12">
-                                <input type="text" name="ShortContent" value="@Model.ShorDescription" class="form-control" required placeholder="ShorDescription" maxlength="110" />
-                                @Html.ValidationMessageFor(model => model.ShorDescription, "", new { @class = "text-danger" })
+                                <input type="number" name="OfferPrice" value="@Model.OfferPrice" class="form-control" required placeholder="Price" maxlength="110" />
+                                @Html.ValidationMessageFor(model => model.OfferPrice, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">Price</label>
+                            <label class="control-label col-md-2">Döviz Tipi</label>
                             <div class="col-md-12">
-                                <input type="number" name="Price" value="@Model.Price" class="form-control" required placeholder="Price" maxlength="110" />
-                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                @Html.DropDownList("CurrencyTypeid", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CurrencyTypeid, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-
                         <div class="form-group">
                             <label class="control-label col-md-2">Aktif Durumu</label>
                             <div class="col-md-12">
@@ -113,11 +90,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="col-md-offset-2 col-md-10">
                                     <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i> Yeni Ürün Güncelle</button>
-                                    <a href="@Url.Action("Index","Seller")" class="btn btn-outline-dark"><i class="fa fa-reply-all"></i> Listeye Geri Dön</a>
+                                    <a href="@Url.Action("Index","Buyer")" class="btn btn-outline-dark"><i class="fa fa-reply-all"></i> Listeye Geri Dön</a>
                                 </div>
                             </div>
                         </div>
@@ -133,5 +111,3 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-

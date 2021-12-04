@@ -1,9 +1,12 @@
-﻿@model IEnumerable<Entity.Entity.ProductCategory>
+﻿@model IEnumerable<Entity.Entity.Order>
 
 @{
-    ViewBag.Title = "ProductCategoryList";
+    ViewBag.Title = "OrderListleme";
     Layout = "~/Views/Shared/_SellerLayout.cshtml";
 }
+
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -18,8 +21,8 @@
                         <thead>
                             <tr>
 
-                                <th>Category Name</th>
-                                <th>Content</th>
+                                <th>Description</th>
+                                <th>OfferPrice</th>
                                 <th>Son Güncelleme Tarihi</th>
                                 <th>Aktif Durumu</th>
                                 <th class="datatable-nosort">İşlemler</th>
@@ -29,8 +32,8 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.Title</td>
-                                    <td>@item.Content</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.OfferPrice</td>
 
                                     <td>@item.LastDateTime.ToString("dd:MM:yyyy")</td>
                                     @if (item.IsActive == true)
@@ -47,8 +50,8 @@
                                                 <i class="dw dw-more"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                               <a class="dropdown-item" href="@Url.Action("UpdateProductCategory/"+item.ID,"Seller")"><i class="dw dw-edit2"></i> Güncelle</a>
-                                                <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="@Url.Action("DeleteProductCategory/"+item.ID,"Seller")"><i class="dw dw-delete-3"></i> Sil</a>
+                                                @*<a class="dropdown-item" href="@Url.Action("UpdateOrder/"+item.ID,"Seller")"><i class="dw dw-edit2"></i> Güncelle</a>*@
+                                                <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="@Url.Action("DeleteOrder/"+item.ID,"Seller")"><i class="dw dw-delete-3"></i> Sil</a>
                                             </div>
                                         </div>
                                     </td>
