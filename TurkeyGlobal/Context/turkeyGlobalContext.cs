@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Entity.Entity;
+using TurkeyGlobal.Models;
 
 namespace TurkeyGlobal.Context
 {
@@ -28,7 +29,8 @@ namespace TurkeyGlobal.Context
             public DbSet<Massages> Massages { get; set; }
             public DbSet<Order> Orders { get; set; }
             public DbSet<Product> Products { get; set; }
-            public DbSet<ProductCategory> ProductCategories { get; set; }
+            public DbSet <Notification> Notifications { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
             public DbSet<ProductFile> ProductFiles { get; set; }
             public DbSet<SellerInfo> SellerInfos { get; set; }
             public DbSet<User> Users { get; set; }

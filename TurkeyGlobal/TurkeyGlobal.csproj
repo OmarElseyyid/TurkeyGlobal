@@ -145,6 +145,7 @@
     <Compile Include="Models\BuyerInfo.cs" />
     <Compile Include="Models\CurrencyType.cs" />
     <Compile Include="Models\Massages.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
