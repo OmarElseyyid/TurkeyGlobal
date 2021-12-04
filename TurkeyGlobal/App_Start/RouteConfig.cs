@@ -18,6 +18,16 @@ namespace TurkeyGlobal
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Buyer",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Buyer", action = "Index", id = UrlParameter.Optional }
+           );
+            routes.MapRoute(
+               name: "Seller",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Seller", action = "Index", id = UrlParameter.Optional }
+           );
         }
     }
 }
