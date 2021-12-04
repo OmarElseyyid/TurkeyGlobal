@@ -13,5 +13,7 @@ namespace TurkeyGlobal.Controllers
         {
             return View();
         }
+
+
     }
 }

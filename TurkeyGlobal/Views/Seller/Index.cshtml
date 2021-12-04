@@ -1,7 +1,18 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
 }
+<div class="content-wrapper">
 
-<h2>Seller Index</h2>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            @{Html.RenderAction("ProductList", "Seller");}
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+
 

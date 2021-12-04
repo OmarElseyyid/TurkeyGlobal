@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Entity.Entity.ProductCategory>
+
+@{
+    ViewBag.Title = "ProductCategoryList";
+    Layout = "~/Views/Shared/_SellerLayout.cshtml";
+}
+
+<form method="post">
+    <div class="card-box mb-30">
+        <h2 class="h4 pd-20">Ürün Kategori Listele</h2>
+        <table class="data-table table nowrap">
+            <thead>
+                <tr>
+                    <th>Başlık</th>
+                    <th>İçerik</th>
+                    <th>Sıralama</th>
+                    <th>Son Güncelleme Tarihi</th>
+                    <th>Aktif Durumu</th>
+                    <th class="datatable-nosort">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Content</td>
+                        <td>@item.Rank</td>
+                        <td>@item.LastDateTime.ToString("dd:MM:yyyy")</td>
+                        @if (item.IsActive == true)
+                        {
+                            <td><span class="badge badge-success"><i class="fa fa-check"></i> Aktif</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-danger"><i class="fa fa-remove"></i> Pasif</span></td>
+                        }
+                        <td>
+                            <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                    <a class="dropdown-item" href="/Admin/ProductCategory/UpdateProductCategory/@item.ID"><i class="dw dw-edit2"></i> Güncelle</a>
+                                    <a class="dropdown-item" onclick="return confirm('Silmek istediğinize eminmisiniz ?')" href="/Admin/ProductCategory/DeleteProductCategory/@item.ID"><i class="dw dw-delete-3"></i> Sil</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
