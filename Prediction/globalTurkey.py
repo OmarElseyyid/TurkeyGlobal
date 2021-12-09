@@ -46,14 +46,3 @@ tahmin=rf_reg.predict([[urun,adet]])
 birim=int(tahmin)/adet
 print("Toplam Fiyat : ",int(tahmin))
 print("Önerilen birim fiyat : ",int(birim))
-db = pyodbc.connect(
-    'Driver={SQL Server};'
-    'Server=.\;'
-    'Database=global;'
-    'Trusted_Connection=True;'
-)
-imlec = db.cursor()
-komut = 'INSERT INTO pricePredict VALUES(?,?,?,?)'
-veriler = (int(urun),int(adet),int(birim),int(tahmin))
-sonuc = imlec.execute(komut,veriler)
-db.commit()
